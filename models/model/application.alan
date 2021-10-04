@@ -13,6 +13,8 @@ root {
 					'Turkey' { }
 					'Syria' { }
 					'Italy' { }
+					'Poland' { }
+					'China' { }
 				)
 				'Ethnic Group': stategroup (
 					'Catholic' { }
