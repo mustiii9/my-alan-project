@@ -1,0 +1,41 @@
+application-servers
+	'server': local
+
+external-systems
+
+systems
+	'client'
+		configuration: 'default'
+			'timezone' = "Europe/Amsterdam"
+
+		instance-data:
+			from 'server' / "ide-AydinMustafa99" / "client"
+
+	'sessions'
+		configuration: custom
+			'token interval' = 86400 // 1 day
+			'token limit' = 2592000 // ~1 month (30 days)
+			'domain name' = none
+			'base uri' = "https://app.alan-platform.com/AydinMustafa99/auth/"
+			'known uris' = (
+				'https://app.alan-platform.com/AydinMustafa99/client/' = "Client"
+			)
+			'openid authority issuer uris' = (
+			)
+			'openid authority client ids' = (
+			)
+
+		instance-data:
+			from 'server' / "ide-AydinMustafa99" / "sessions"
+
+	'server'
+		configuration: 'multi-core'
+
+		instance-data:
+			from 'server' / "ide-AydinMustafa99" / "server"
+			@migrate
+
+		schedule:
+			every day every hour
+				at 0
+				at 30

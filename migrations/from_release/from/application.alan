@@ -1,0 +1,17 @@
+users
+	anonymous
+
+interfaces
+
+root {
+	'Menu': collection ['Item name'] {
+		'Item name': text
+		'Selling price': number 'eurocent'
+	}
+}
+numerical-types
+'eurocent'
+@numerical-type: (
+	label: "Euro"
+	decimals: 2
+)

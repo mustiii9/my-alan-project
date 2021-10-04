@@ -1,0 +1,38 @@
+users
+	anonymous
+
+interfaces
+
+root {
+	'Menu': collection ['Item name'] {
+		'Name': text
+		'Selling price': number 'eurocent'
+		'Item type': stategroup (
+			'Maraakech' {
+				'Dish type': stategroup (
+					'Appetizer' { }
+					'Main course' { }
+					'Dessert' { }
+				)
+			}
+			'Beverage' {
+				'Beverage type': stategroup (
+					'Juice' { }
+					'Soft drink' { }
+					'Cocktail' { }
+					'Beer' { }
+					'Wine' { }
+					'Coffee & tea' { }
+				)
+			}
+		)
+	}
+}
+
+
+numerical-types
+'eurocent'
+@numerical-type: (
+	label: "Euro"
+	decimals: 2
+)

@@ -1,0 +1,110 @@
+root = root as $ (
+	'Menu': collection = <! !> (
+		= (
+			'Item name': text = "Shrimp salad"
+			'Selling price': number = 350
+			'Item type': stategroup = 'Dish' (
+				'Dish type': stategroup = 'Appetizer' ( )
+			)
+		)
+		= (
+			'Item name': text = "Tomato soup"
+			'Selling price': number = 450
+			'Item type': stategroup = 'Dish' (
+				'Dish type': stategroup = 'Appetizer' ( )
+			)
+		)
+		= (
+			'Item name': text = "Ciabatta with tapenade"
+			'Selling price': number = 250
+			'Item type': stategroup = 'Dish' (
+				'Dish type': stategroup = 'Appetizer' ( )
+			)
+		)
+		= (
+			'Item name': text = "Beef stew"
+			'Selling price': number = 1800
+			'Item type': stategroup = 'Dish' (
+				'Dish type': stategroup = 'Main course' ( )
+			)
+		)
+		= (
+			'Item name': text = "Grilled salmon"
+			'Selling price': number = 1650
+			'Item type': stategroup = 'Dish' (
+				'Dish type': stategroup = 'Main course' ( )
+			)
+		)
+		= (
+			'Item name': text = "Mashed potato with sauerkraut"
+			'Selling price': number = 1400
+			'Item type': stategroup = 'Dish' (
+				'Dish type': stategroup = 'Main course' ( )
+			)
+		)
+		= (
+			'Item name': text = "Chocolate mousse"
+			'Selling price': number = 450
+			'Item type': stategroup = 'Dish' (
+				'Dish type': stategroup = 'Dessert' ( )
+			)
+		)
+		= (
+			'Item name': text = "Vanilla ice cream"
+			'Selling price': number = 350
+			'Item type': stategroup = 'Dish' (
+				'Dish type': stategroup = 'Dessert' ( )
+			)
+		)
+		= (
+			'Item name': text = "Cherry pie"
+			'Selling price': number = 400
+			'Item type': stategroup = 'Dish' (
+				'Dish type': stategroup = 'Dessert' ( )
+			)
+		)
+		= (
+			'Item name': text = "Orange juice"
+			'Selling price': number = 450
+			'Item type': stategroup = 'Beverage' (
+				'Beverage type': stategroup = 'Juice' ( )
+			)
+		)
+		= (
+			'Item name': text = "Spa rood"
+			'Selling price': number = 300
+			'Item type': stategroup = 'Beverage' (
+				'Beverage type': stategroup = 'Soft drink' ( )
+			)
+		)
+		= (
+			'Item name': text = "Heineken pilsner"
+			'Selling price': number = 420
+			'Item type': stategroup = 'Beverage' (
+				'Beverage type': stategroup = 'Beer' ( )
+			)
+		)
+		= (
+			'Item name': text = "Cappuccino"
+			'Selling price': number = 350
+			'Item type': stategroup = 'Beverage' (
+				'Beverage type': stategroup = 'Coffee & tea' ( )
+			)
+		)
+		= (
+			'Item name': text = "Mint tea"
+			'Selling price': number = 300
+			'Item type': stategroup = 'Beverage' (
+				'Beverage type': stategroup = 'Coffee & tea' ( )
+			)
+		)
+		= (
+			'Item name': text = "Mojito"
+			'Selling price': number = 630
+			'Item type': stategroup = 'Beverage' (
+				'Beverage type': stategroup = 'Cocktail' ( )
+			)
+		)
+
+	)
+)
