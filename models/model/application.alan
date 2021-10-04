@@ -7,7 +7,6 @@ root {
 	'Registration': collection ['Surname'] {
 		'Surname': text
 		'First Name': text
-
 				'Country of Origion': stategroup (
 					'Germany' { }
 					'Turkey' { }
@@ -28,5 +27,4 @@ root {
 				)
 	}
 }
-
 numerical-types
