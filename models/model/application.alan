@@ -4,7 +4,7 @@ users
 interfaces
 
 root {
-	'Registrary': collection ['Surname'] {
+	'Registration': collection ['Surname'] {
 		'Surname': text
 		'First Name': text
 
@@ -27,17 +27,6 @@ root {
 					'Scientology'{ }
 				)
 	}
-	'Application': collection ['Table number'] {
-		'Table number': text
-		'Seatings': number 'chairs'
-		'Orders': collection ['Order line'] {
-			'Order line': text
-			'Item': text -> ^ ^ .'Registrary'[]
-			'Amount': number 'units'
-		}
-	}
 }
 
 numerical-types
-'chairs'
-'units'
