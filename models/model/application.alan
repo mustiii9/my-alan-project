@@ -14,6 +14,7 @@ root {
 					'Syria' { }
 					'Italy' { }
 					'France' { }
+					'Poland' { }
 				)
 				'Ethnic Group': stategroup (
 					'Catholic' { }
