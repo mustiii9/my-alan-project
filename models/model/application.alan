@@ -4,35 +4,36 @@ users
 interfaces
 
 root {
-	'Menu': collection ['Item name'] {
-		'Name': text
-		'Selling price': number 'eurocent'
-		'Item type': stategroup (
-			'Maraakech' {
-				'Dish type': stategroup (
-					'Appetizer' { }
-					'Main course' { }
-					'Dessert' { }
+	'Registrary': collection ['Surname'] {
+		'Surname': text
+		'First Name': text
+
+				'Country of Origion': stategroup (
+					'Germany' { }
+					'Turkey' { }
+					'Syria' { }
+					'Italy' { }
 				)
-			}
-			'Beverage' {
-				'Beverage type': stategroup (
-					'Juice' { }
-					'Soft drink' { }
-					'Cocktail' { }
-					'Beer' { }
-					'Wine' { }
-					'Coffee & tea' { }
+				'Ethnic Group': stategroup (
+					'Catholic' { }
+					'Suni' { }
+					'Jewish' { }
+					'Hinduismus' { }
+					'Protestand' { }
+					'Shia' { }
 				)
-			}
-		)
+	}
+	'Application': collection ['Table number'] {
+		'Table number': text
+		'Seatings': number 'chairs'
+		'Orders': collection ['Order line'] {
+			'Order line': text
+			'Item': text -> ^ ^ .'Registrary'[]
+			'Amount': number 'units'
+		}
 	}
 }
 
-
 numerical-types
-'eurocent'
-@numerical-type: (
-	label: "Euro"
-	decimals: 2
-)
+'chairs'
+'units'
