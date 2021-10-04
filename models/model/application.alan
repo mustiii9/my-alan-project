@@ -4,27 +4,30 @@ users
 interfaces
 
 root {
-	'Registration': collection ['Surname'] {
-		'Surname': text
-		'First Name': text
-				'Country of Origion': stategroup (
-					'Germany' { }
-					'Turkey' { }
-					'Syria' { }
-					'Italy' { }
-					'France' { }
-					'Poland' { }
-					'Bulgaria' { }
-				)
-				'Ethnic Group': stategroup (
-					'Catholic' { }
-					'Suni' { }
-					'Jewish' { }
-					'Hinduismus' { }
-					'Protestand' { }
-					'Shia' { }
-					'Scientology'{ }
-				)
+	'Applicants': collection ['Full Name'] {
+		'Full Name': text
+			'Sex': stategroup (
+				'Male' { }
+				'Female' { }
+			)
+			'Country of Origin': stategroup (
+				'Germany' { }
+				'Turkey' { }
+				'Syria' { }
+				'Italy' { }
+				'France' { }
+				'Poland' { }
+				'Bulgaria' { }
+			)
+			'Ethnic Group': stategroup (
+				'Catholic' { }
+				'Suni' { }
+				'Jewish' { }
+				'Hinduismus' { }
+				'Protestand' { }
+				'Shia' { }
+				'Scientology'{ }
+			)
 	}
 }
 numerical-types
