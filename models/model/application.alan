@@ -13,13 +13,8 @@ root {
 					'Turkey' { }
 					'Syria' { }
 					'Italy' { }
-<<<<<<< HEAD
-					'Poland' { }
-					'China' { }
-=======
 					'France' { }
 					'Poland' { }
->>>>>>> d7295427b943a38d71fd0d6f106f7baff3ca6f91
 				)
 				'Ethnic Group': stategroup (
 					'Catholic' { }
@@ -28,6 +23,7 @@ root {
 					'Hinduismus' { }
 					'Protestand' { }
 					'Shia' { }
+					'Scientology'{ }
 				)
 	}
 	'Application': collection ['Table number'] {
