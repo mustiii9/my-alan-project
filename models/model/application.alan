@@ -18,6 +18,7 @@ root {
 				'France' { }
 				'Poland' { }
 				'Bulgaria' { }
+				'Denmark' { }
 			)
 			'Ethnic Group': stategroup (
 				'Catholic' { }
