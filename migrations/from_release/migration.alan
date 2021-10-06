@@ -2,6 +2,7 @@ root = root as $ (
 	'Applicant': group = (
 		'ID': collection = <! !> (
 			= (
+				'Applicant ID': text = "1"
 				'First Name': text = "Henk"
 				'Surname': text = "Abdullah"
 				'Country of birth': text = "Syria"
@@ -10,11 +11,28 @@ root = root as $ (
 				'Country': stategroup = 'Other' (
 					'Other country': text = "Germany"
 				)
-
 			)
 		)
-	)
+		'Documents': collection = <! !> (
+			= (
+				'Applicant ID': text = "1"
+				'Passport?': stategroup = 'No' ( )
+				'ID-card?': stategroup = 'No' ( )
+				'Drivers license?': stategroup = 'No' ( )
+				'Birth certificate?': stategroup = 'No' ( )
+				'Other proof of ID?': stategroup = 'No' ( )
+			)
+		)
+		'Appearance': collection = <! !> (
+			= (
+				'Applicant ID': text = "1"
+				'Height': number = 180
+				'Weight': number = 90
+				'Eye color': stategroup = 'Green' ( )
+			)
+		)
 
+	)
 	'Management': group = (
 		'Discount periods': collection = <! !> (
 			= (
