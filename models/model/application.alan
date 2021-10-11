@@ -73,8 +73,48 @@ root {
 			)
 		}
 
-	}
 
+	'Add Refuge': command {
+		'Add Applicant ID': text @default: auto-increment
+			'Add First Name': text
+			'Add Surname': text
+			'What is the Country of birth': text
+			'What is the Date of birth': text
+			'What is the Gender of the Refuge?': stategroup (
+				'Male' { }
+				'Female' { }
+				'Diverse' { }
+		)
+		'What Country are you from': stategroup (
+			'Syria' { }
+			'Afghanistan' { }
+			'Eritrea' { }
+			'Iraq' { }
+			'Iran'	{ }
+			'Turkey' { }
+		)
+
+	} => update .'ID' = create (
+		'Applicant ID' = @ .'Add Applicant ID'
+		'First Name' = @ .'Add First Name'
+		'Surname' = @ .'Add Surname'
+		'Country of birth' = @ .'What is the Country of birth'
+		'Date of birth' = @ .'What is the Date of birth'
+		'Gender' = switch @ .'What is the Gender of the Refuge?' (
+			|'Male' => create 'Male' ( )
+			|'Female'  => create 'Female' ( )
+			|'Diverse' => create 'Diverse' ( )
+			)
+		'Country' = switch @ .'What Country are you from' (
+			|'Syria' => create 'Syria' ( )
+			|'Afghanistan' => create 'Afghanistan' ( )
+			|'Eritrea' => create 'Eritrea' ( )
+			|'Iraq' => create 'Iraq' ( )
+			|'Iran'	=> create 'Iran' ( )
+			|'Turkey' => create 'Turkey' ( )
+			)
+		)
+	}
 	'Management': group {
 		'Discount periods': collection ['Period'] {
 			'Period': text
