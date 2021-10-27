@@ -1,7 +1,8 @@
 users
-	anonymous
+anonymous
 
 interfaces
+
 
 root {
 	'Countries': collection ['Country'] {
@@ -28,6 +29,11 @@ root {
 			)
 			'Country': text -> ^ ^ . 'Countries' []
 			'Religion': text -> ^ ^ . 'Religion' []
+			'Eligibility': stategroup (
+				'No' { }
+				'Yes' { }
+			)
+			'Risk level': number 'R-score'
 			'Documents': collection ['Document ID'] {
 				'Document ID': text @default: auto-increment
 				'Document Typ': stategroup (
@@ -78,6 +84,11 @@ root {
 				)
 				'Country': text ->  ^ . 'Countries' []
 				'Religion': text -> ^ . 'Religion' []
+				'Eligibility': stategroup (
+					'No' { }
+					'Yes' { }
+				)
+				'Risk level': number 'R-score'
 				'Documents': collection ['Document ID'] {
 					'Document ID': text @default: auto-increment
 					'Document Typ': stategroup (
@@ -126,6 +137,11 @@ root {
 				)
 			'Country' = @ .'Country'
 			'Religion' = @ .'Religion'
+			'Eligibility'= switch @ .'Eligibility' (
+				|'No'  => create 'No' ( )
+				|'Yes'  => create 'Yes' ( )
+			)
+			'Risk level'= @ .'Risk level'
 			'Documents' = walk @ .'Documents' as $ (
 				create (
 					'Document ID' = $ .'Document ID'
@@ -239,3 +255,4 @@ numerical-types
 	'days'
 	'Date' in 'days'
 		@date
+	'R-score'
