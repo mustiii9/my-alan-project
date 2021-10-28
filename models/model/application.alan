@@ -1,4 +1,5 @@
 users
+anonymous
 dynamic: .'Users'
 user-initializer: (
 	'Type' = create 'Unknown' ( )
@@ -19,6 +20,7 @@ interfaces
 root {
 	can-update: user .'Type'?'Admin'
 
+
 	'Users': collection ['Name'] {
 		'Name': text
 		'Type': stategroup (
@@ -38,7 +40,238 @@ root {
 			)
 		}
 	}
+
+//////////
+
+	'Countries': collection ['Country'] {
+		'Country': text
+		'Country Risk': number 'risk-level'
+	}
+	'Religion': collection ['Religion'] {
+		'Religion': text
+		'Religion Risk': number 'risk-level'
+	}
+	'Applicant': group {
+		'ID': collection ['Applicant ID'] {
+			'Applicant ID': text @default: auto-increment
+
+			'Calculate Risk Score': command {
+			} => update  (
+		'Risk Score' = sum ( >'Country'.'Country Risk' , >'Religion'.'Religion Risk' )
+			)
+		'Risk Score': number '%'
+
+			'First Name': text
+			'Surname': text
+			'Country of birth': text -> ^ ^ . 'Countries' []
+			'Date of birth': number 'Date'
+			'Gender': stategroup (
+				'Male' { }
+				'Female' { }
+				'Diverse' { }
+			)
+			'Country': text -> ^ ^ . 'Countries' []
+			'Religion': text -> ^ ^ . 'Religion' []
+
+
+
+			'Documents': collection ['Document ID'] {
+				'Document ID': text @default: auto-increment
+				'Document Typ': stategroup (
+					'Passport' { }
+					'ID Card' { }
+					'Drivers license' { }
+					'Birth certificate' { }
+					'Other proof of ID' { }
+				)
+				'File': file
+			}
+			'Appearance': collection ['Appearance ID'] {
+				'Appearance ID': text
+				'Height': number positive 'Centimeters'
+				'Weight': number positive 'Kilograms'
+				'Eye color': stategroup (
+					'Brown' { }
+					'Blue' { }
+					'Green' { }
+					'Other' { }
+				)
+			}
+			'Criminal Record': collection ['Crime ID'] {
+				'Crime ID': text
+				'Crime': text
+				'Type of Crime': stategroup (
+					'Crime against a Person' { }
+					'Crimes against Property' { }
+					'Drug crime' { }
+					'Trafficing crime' { }
+					'Financial & White collar crime' { }
+					'Crime against Humanity' { }
+					'Minor Offence' { }
+				)
+			}
+		}
+
+		'Add Refugee': command {
+				'Add Applicant ID': text @default: auto-increment
+					'Add First Name': text
+					'Add Surname': text
+					'What is the Country of birth': text ->  ^ . 'Countries' []
+					'What is the Date of birth': number 'Date'
+					'What is the Gender of the Refuge?': stategroup (
+						'Male' { }
+						'Female' { }
+						'Diverse' { }
+				)
+				'Country': text ->  ^ . 'Countries' []
+				'Religion': text -> ^ . 'Religion' []
+
+				'Documents': collection ['Document ID'] {
+					'Document ID': text @default: auto-increment
+					'Document Typ': stategroup (
+							'Passport' { }
+							'ID Card' { }
+							'Drivers license' { }
+							'Birth certificate' { }
+							'Other proof of ID' { }
+						)
+					'File': file
+					}
+				'Appearance': collection ['Appearance ID'] {
+					'Appearance ID': text
+					'Height': number positive 'Centimeters'
+					'Weight': number positive 'Kilograms'
+					'Eye color': stategroup (
+						'Brown' { }
+						'Blue' { }
+						'Green' { }
+						'Other' { }
+				)
+			}
+						'Criminal Record': collection ['Crime ID'] {
+							'Crime ID': text
+							'Crime': text
+							'Type of Crime': stategroup (
+								'Crime against a Person' { }
+								'Crimes against Property' { }
+								'Drug crime' { }
+								'Trafficing crime' { }
+								'Financial & White collar crime' { }
+								'Crime against Humanity' { }
+								'Minor Offence' { }
+							)
+						}
+		} => update .'ID' = create (
+			'Applicant ID' = @ .'Add Applicant ID'
+			'First Name' = @ .'Add First Name'
+			'Surname' = @ .'Add Surname'
+			'Country of birth' = @ .'What is the Country of birth'
+			'Date of birth' = @ .'What is the Date of birth'
+			'Gender' = switch @ .'What is the Gender of the Refuge?' (
+				|'Male' => create 'Male' ( )
+				|'Female'  => create 'Female' ( )
+				|'Diverse' => create 'Diverse' ( )
+				)
+			'Country' = @ .'Country'
+			'Religion' = @ .'Religion'
+			'Risk Score' = 0
+			'Documents' = walk @ .'Documents' as $ (
+				create (
+					'Document ID' = $ .'Document ID'
+					'Document Typ' = switch $ .'Document Typ' (
+						|'Passport' => create 'Passport' ( )
+						|'ID Card' => create 'ID Card' ( )
+						|'Drivers license' => create 'Drivers license' ( )
+						|'Birth certificate' => create 'Birth certificate' ( )
+						|'Other proof of ID'	=> create 'Other proof of ID' ( )
+						)
+					'File' = $ . 'File'
+					)
+				)
+			'Appearance' = walk @ .'Appearance' as $ (
+				create (
+					'Appearance ID' = $ . 'Appearance ID'
+					'Height' = $ .'Height'
+					'Weight' = $ .'Weight'
+					'Eye color' = switch $ .'Eye color' (
+						|'Brown' => create 'Brown' ( )
+						|'Blue' => create 'Blue' ( )
+						|'Green' => create 'Green' ( )
+						|'Other' => create 'Other' ( )
+						)
+					)
+				)
+			'Criminal Record' = walk @ . 'Criminal Record' as $ (
+				create (
+					'Crime ID' = $ . 'Crime ID'
+					'Crime' = $ . 'Crime'
+					'Type of Crime' = switch $ .'Type of Crime' (
+						|'Crime against a Person' => create 'Crime against a Person' ( )
+						|'Crimes against Property' => create 'Crimes against Property' ( )
+						|'Trafficing crime' => create 'Trafficing crime' ( )
+						|'Drug crime' => create 'Drug crime' ( )
+						|'Financial & White collar crime' => create 'Financial & White collar crime' ( )
+						|'Crime against Humanity' => create 'Crime against Humanity' ( )
+						|'Minor Offence' => create 'Minor Offence' ( )
+						)
+					)
+				)
+		)
+	}
+	'Cases': collection ['Case ID'] {
+		'Case ID': text @default: auto-increment
+		'Applicant ID': text -> ^ . 'Applicant' . 'ID' []
+		'Case Status': stategroup (
+			'In Progress' { }
+			'Accepted' { }
+			'Rejected' { }
+		)
+		'Change Case Status': command can-execute: user .'Type'?'Admin' {
+			'What is the Case Status?': stategroup (
+				'In Progress' { }
+				'Accepted' { }
+				'Rejected' { }
+			)
+		} => update . 'Case Status' = switch @ .'What is the Case Status?' (
+					|'In Progress' => create 'In Progress' ( )
+					|'Accepted' => create 'Accepted' ( )
+					|'Rejected' => create 'Rejected' ( )
+			)
+
+		'Appeal': command can-execute: user .'Type'?'Unknown' {
+			'Add Arguments': text
+			} => update . 'Arguments' = @ . 'Add Arguments'
+
+		'Arguments': text
+	}
+
+	'Add Case': command can-execute: user .'Type'?'Admin' {
+		'Case ID': text @default: auto-increment
+		'Add Applicant:': text ->  . 'Applicant' . 'ID' []
+		'What is the Case Status?': stategroup (
+			'In Progress' { }
+			'Accepted' { }
+			'Rejected' { }
+		)
+	} => update .'Cases' = create (
+		'Case ID' = @ .'Case ID'
+		'Applicant ID' = @ .'Add Applicant:'
+		'Case Status' = switch @ .'What is the Case Status?' (
+			|'In Progress' => create 'In Progress' ( )
+			|'Accepted' => create 'Accepted' ( )
+			|'Rejected' => create 'Rejected' ( )
+			)
+		'Arguments' = @ . 'Case ID'
+		)
+
+//////////////
 }
 
 numerical-types
-
+	'risk-level'
+	'Centimeters'
+	'Kilograms'
+	'days'
+	'Date' in 'days'
+		@date
+	'%'
