@@ -238,22 +238,14 @@ root {
 					|'Rejected' => create 'Rejected' ( )
 			)
 
-<<<<<<< HEAD
 		'Appeal': command can-execute: user .'Type'?'Unknown' {
-=======
-		'Appeal': command {
->>>>>>> bd7ff097ad88389109862a397e275b52713691aa
 			'Add Arguments': text
 			} => update . 'Arguments' = @ . 'Add Arguments'
 
 		'Arguments': text
 	}
 
-<<<<<<< HEAD
 	'Add Case': command can-execute: user .'Type'?'Admin' {
-=======
-	'Add Case': command {
->>>>>>> bd7ff097ad88389109862a397e275b52713691aa
 		'Case ID': text @default: auto-increment
 		'Add Applicant:': text ->  . 'Applicant' . 'ID' []
 		'What is the Case Status?': stategroup (
@@ -282,8 +274,4 @@ numerical-types
 	'days'
 	'Date' in 'days'
 		@date
-<<<<<<< HEAD
 	'%'
-=======
-	'%'
->>>>>>> bd7ff097ad88389109862a397e275b52713691aa
